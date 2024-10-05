@@ -24,6 +24,7 @@ const displayAllPhone = (phones) =>{
    document.getElementById('phones-container').innerHTML =''
 phones.forEach(phone => {
     const {brand ,image,slug}= phone
+    console.log(phone)
     const div = document.createElement('div')
     div.innerHTML = `
     <div class="card card-compact mt-5 space-y-4 shadow-xl">
@@ -34,7 +35,7 @@ phones.forEach(phone => {
             <h2 class="card-title">${brand}</h2>
             <p>${slug}</p>
             <div class="card-actions">
-            <button class="btn btn-primary">Show Details</button>
+            <button onclick="phoneDetails('${slug}')" class="btn btn-primary">Show Details</button>
             </div>
         </div>
         </div>
@@ -43,11 +44,28 @@ phones.forEach(phone => {
     phonesContainer.append(div)
 });
 
+ async function phoneDetails(slug) {
+    const res = await fetch(`https://openapi.programming-hero.com/api/phone/${slug}`)
+    const data = await res.json()
+    console.log(data)
 
 
 
-
-
+    // const modalContainer = document.createElement('div')
+    // modalContainer.innerHTML =`
+    // <!-- Open the modal using ID.showModal() method -->
+    //     <button class="btn" onclick="my_modal_2.showModal()">open modal</button>
+    //     <dialog id="my_modal_2" class="modal">
+    //     <div class="modal-box">
+    //         <h3 class="text-lg font-bold">Hello!</h3>
+    //         <p class="py-4">Press ESC key or click outside to close</p>
+    //     </div>
+    //     <form method="dialog" class="modal-backdrop">
+    //         <button>close</button>
+    //     </form>
+    //     </dialog>
+    // `
+}
 
 
 }
